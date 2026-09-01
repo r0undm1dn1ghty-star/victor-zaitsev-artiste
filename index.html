@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виктор Зайцев — Опись</title>
+
+    <meta name="description" content="Личная опись Виктора Зайцева: интерфейсы, музыка, медиа и стратегия — то, что доведено до конца.">
+    <meta name="theme-color" content="#15181a">
+
+    <!-- ЗАМЕНИ: когда появится реальный адрес страницы, добавь og:url и <link rel="canonical"> -->
+    <meta property="og:title" content="Виктор Зайцев — Опись">
+    <meta property="og:description" content="Личный архив: интерфейсы, музыка, медиа, стратегия.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%2315181a'/%3E%3Ctext x='32' y='43' font-family='Georgia, serif' font-weight='600' font-size='26' fill='%23c2543a' text-anchor='middle'%3EVZ%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink: #15181a;
+            --paper: #ece7da;
+            --paper-dim: rgba(236, 231, 218, 0.58);
+            --accent: #c2543a;
+            --line: rgba(236, 231, 218, 0.14);
+            --serif: 'Fraunces', Georgia, serif;
+            --sans: 'Space Grotesk', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--ink);
+            color: var(--paper);
+            font-family: var(--sans);
+            font-weight: 300;
+        }
+
+        a { color: inherit; }
+
+        ::selection { background: var(--accent); color: var(--ink); }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 3rem;
+            background: rgba(21, 24, 26, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .wordmark {
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            letter-spacing: 0.03em;
+        }
+
+        header nav { display: flex; gap: 2rem; }
+
+        header nav a {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            text-decoration: none;
+            color: var(--paper-dim);
+            transition: color 0.25s ease;
+        }
+
+        header nav a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 3rem 4rem 3rem;
+            max-width: 1100px;
+        }
+
+        .hero-meta {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            max-width: 18ch;
+        }
+
+        .hero-sub {
+            margin-top: 2rem;
+            max-width: 46ch;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--paper-dim);
+        }
+
+        /* Section scaffolding */
+        section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+        .section-kicker {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--paper-dim);
+            margin-bottom: 3rem;
+        }
+
+        /* Catalog */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+
+        .entry-list { border-top: 1px solid var(--line); }
+
+        .entry {
+            display: grid;
+            grid-template-columns: 3rem 6.5rem 1fr auto;
+            align-items: baseline;
+            gap: 1rem;
+            width: 100%;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--line);
+            background: none;
+            border-left: none; border-right: none; border-top: none;
+            color: var(--paper);
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s ease;
+        }
+
+        .entry:hover, .entry:focus-visible { background: rgba(236, 231, 218, 0.035); }
+
+        .entry-num { font-family: var(--mono); font-size: 0.82rem; color: var(--paper-dim); }
+        .entry-tag {
+            font-family: var(--mono);
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--paper-dim);
+        }
+        .entry.active .entry-tag { color: var(--accent); }
+
+        .entry-title {
+            font-family: var(--serif);
+            font-size: 1.35rem;
+            font-weight: 400;
+        }
+
+        .entry-year { font-family: var(--mono); font-size: 0.78rem; color: var(--paper-dim); }
+        .entry-thumb { display: none; }
+
+        .preview {
+            position: sticky;
+            top: 6.5rem;
+            border: 1px solid var(--line);
+            padding: 1.5rem;
+        }
+
+        .preview img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            filter: grayscale(55%) contrast(105%);
+            margin-bottom: 1.25rem;
+        }
+
+        #previewCaption {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: var(--paper-dim);
+        }
+
+        /* Manifest */
+        .manifest-text {
+            font-family: var(--serif);
+            font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+            font-weight: 400;
+            line-height: 1.55;
+            max-width: 62ch;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 6rem 3rem 3rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            margin-bottom: 1rem;
+        }
+
+        .footer-sub {
+            color: var(--paper-dim);
+            max-width: 40ch;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .footer-email {
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 2px;
+        }
+
+        .footer-email:hover { color: var(--accent); }
+
+        .copyright {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--paper-dim);
+            margin-top: 4rem;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            header { padding: 1rem 1.5rem; }
+            header nav { gap: 1.25rem; }
+            .hero { padding: 7rem 1.5rem 3rem 1.5rem; }
+            section { padding: 4rem 1.5rem; }
+            footer { padding: 4rem 1.5rem 2rem 1.5rem; }
+
+            .catalog-grid { grid-template-columns: 1fr; }
+            .preview { display: none; }
+
+            .entry { display: block; padding: 1.5rem 0; cursor: default; }
+            .entry-thumb {
+                display: block;
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
+                filter: grayscale(55%);
+                border: 1px solid var(--line);
+                margin-bottom: 0.9rem;
+            }
+            .entry-num, .entry-tag, .entry-year { display: inline-block; margin-right: 0.7rem; }
+            .entry-title { display: block; margin-top: 0.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="wordmark">В. ЗАЙЦЕВ / ОПИСЬ</div>
+        <nav>
+            <a href="#catalog">01 Каталог</a>
+            <a href="#manifest">02 О описи</a>
+            <a href="#contact">03 Оставить запись</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <p class="hero-meta">Опись · 004 единицы хранения · интерфейсы / звук / медиа / стратегия</p>
+        <h1 class="hero-title">Архив вещей, которые я довёл до конца.</h1>
+        <p class="hero-sub">Меня зовут Виктор Зайцев. Здесь — то, что я спроектировал, записал и запустил, разложенное по карточкам, как в старом каталоге.</p>
+    </section>
+
+    <!-- КАТАЛОГ -->
+    <section id="catalog">
+        <p class="section-kicker">Каталог</p>
+
+        <!-- ЗАМЕНИ: заголовки, годы, описания и картинки — сейчас это условная заготовка на 4 категории.
+             data-img / data-caption на кнопке управляют правой панелью предпросмотра. -->
+        <div class="catalog-grid">
+            <div class="entry-list">
+                <button class="entry active" data-img="https://images.unsplash.com/photo-1551288043-be36b8bcb2b1?q=80&w=1600&auto=format&fit=crop" data-caption="Рабочие проекты в UI/UX — от исследования до запуска. Замени на своё описание.">
+                    <span class="entry-num">001</span>
+                    <span class="entry-tag">UI/UX</span>
+                    <span class="entry-title">Рабочие проекты</span>
+                    <span class="entry-year">ЗАМЕНИ</span>
+                    <img class="entry-thumb" src="https://images.unsplash.com/photo-1551288043-be36b8bcb2b1?q=80&w=1600&auto=format&fit=crop" alt="">
+                </button>
+
+                <button class="entry" data-img="https://images.unsplash.com/photo-1470225620780-dba6f3e5c3b3?q=80&w=1600&auto=format&fit=crop" data-caption="Выпущенные альбомы и треки. Замени на своё описание.">
+                    <span class="entry-num">002</span>
+                    <span class="entry-tag">Музыка</span>
+                    <span class="entry-title">Альбомы</span>
+                    <span class="entry-year">ЗАМЕНИ</span>
+                    <img class="entry-thumb" src="https://images.unsplash.com/photo-1470225620780-dba6f3e5c3b3?q=80&w=1600&auto=format&fit=crop" alt="">
+                </button>
+
+                <button class="entry" data-img="https://images.unsplash.com/photo-1495020689017-a639952fee66?q=80&w=1600&auto=format&fit=crop" data-caption="Собственное медиа, запущенное с нуля. Замени на своё описание.">
+                    <span class="entry-num">003</span>
+                    <span class="entry-tag">Медиа</span>
+                    <span class="entry-title">Своё медиа</span>
+                    <span class="entry-year">ЗАМЕНИ</span>
+                    <img class="entry-thumb" src="https://images.unsplash.com/photo-1495020689017-a639952fee66?q=80&w=1600&auto=format&fit=crop" alt="">
+                </button>
+
+                <button class="entry" data-img="https://images.unsplash.com/photo-1531058027887-377b3cb1d781?q=80&w=1600&auto=format&fit=crop" data-caption="Стратегия и креативное направление. Замени на своё описание.">
+                    <span class="entry-num">004</span>
+                    <span class="entry-tag">Стратегия</span>
+                    <span class="entry-title">Креативное направление</span>
+                    <span class="entry-year">ЗАМЕНИ</span>
+                    <img class="entry-thumb" src="https://images.unsplash.com/photo-1531058027887-377b3cb1d781?q=80&w=1600&auto=format&fit=crop" alt="">
+                </button>
+            </div>
+
+            <div class="preview">
+                <img id="previewImg" src="https://images.unsplash.com/photo-1551288043-be36b8bcb2b1?q=80&w=1600&auto=format&fit=crop" alt="">
+                <p id="previewCaption">Рабочие проекты в UI/UX — от исследования до запуска. Замени на своё описание.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- О ОПИСИ -->
+    <section id="manifest">
+        <p class="section-kicker">О описи</p>
+        <p class="manifest-text">Я не выбирал одно ремесло. Проектировал интерфейсы, писал и сводил музыку, запускал собственное медиа — и каждый раз это была одна и та же задача: довести смутную идею до вещи, которую можно потрогать. Это не резюме и не питч. Это опись того, что уже существует.</p>
+    </section>
+
+    <!-- СВЯЗЬ -->
+    <footer id="contact">
+        <p class="section-kicker">Связь</p>
+        <h2 class="footer-title">Следующая карточка</h2>
+        <p class="footer-sub">Если у тебя есть что добавить в мою опись — просто напиши.</p>
+        <!-- ЗАМЕНИ: email ниже — заглушка -->
+        <a href="mailto:victor@your-email.com" class="footer-email">victor@your-email.com</a>
+        <p class="copyright">Опись обновлена в <span id="year"></span> году · Виктор Зайцев</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const entries = document.querySelectorAll('.entry');
+        const previewImg = document.getElementById('previewImg');
+        const previewCaption = document.getElementById('previewCaption');
+
+        function activate(entry) {
+            entries.forEach(e => e.classList.remove('active'));
+            entry.classList.add('active');
+            previewImg.src = entry.dataset.img;
+            previewImg.alt = entry.querySelector('.entry-title').textContent;
+            previewCaption.textContent = entry.dataset.caption;
+        }
+
+        entries.forEach(entry => {
+            entry.addEventListener('mouseenter', () => activate(entry));
+            entry.addEventListener('focus', () => activate(entry));
+        });
+    </script>
+</body>
+</html>
